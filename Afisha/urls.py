@@ -22,9 +22,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/test/', views.test_api_view),
     path('api/v1/directors/', views.DirectorView),
-    path('api/v1/directors/<int:director_id>/', views.DirectorView),
+    path('api/v1/directors/<int:id>/', views.DirectorDetailView),
     path('api/v1/movies/', views.MovieView),
-    path('api/v1/movies/<int:movie_id>/', views.MovieView),
+    path('api/v1/movies/<int:id>/', views.MovieDetailView),
     path('api/v1/reviews/', views.ReviewView),
-    path('api/v1/reviews/<int:review_id>/', views.ReviewView),
+    path('api/v1/reviews/<int:id>/', views.ReviewDetailView),
 ]

@@ -6,10 +6,25 @@ from .serializers import DirectorSerializer, MovieSerializer, ReviewSerializer
 
 
 @api_view(['GET'])
+def DirectorDetailView(request, id):
+    directors = Director.objects.get(id=id)
+    data = DirectorSerializer(directors).data
+    return Response(data=data)
+
+
+
+@api_view(['GET'])
 def DirectorView(request):
     directors = Director.objects.all()
-    data = DirectorSerializer(instance=Director, many=False).data
+    data = DirectorSerializer(directors, many=True).data
     return Response(data=data, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+def MovieDetailView(request, id):
+    movies = Movie.objects.get(id=id)
+    data = MovieSerializer(movies).data
+    return Response(data=data)
 
 
 @api_view(['GET'])
@@ -18,6 +33,12 @@ def MovieView(request):
     data = MovieSerializer(instance=movies, many=True).data
     return Response(data=data, status=status.HTTP_200_OK)
 
+
+@api_view(['GET'])
+def ReviewDetailView(request, id):
+    reviews = Review.objects.get(id=id)
+    data = ReviewSerializer(reviews).data
+    return Response(data=data)
 
 @api_view(['GET'])
 def ReviewView(request):
