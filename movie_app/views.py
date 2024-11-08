@@ -1,16 +1,24 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, generics
 from .models import Director, Movie, Review
 from .serializers import DirectorSerializer, MovieSerializer, ReviewSerializer
 
+
+class MovieReviewListView(generics.ListAPIView):
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
+
+
+class DirectorReviewListView(generics.ListAPIView):
+    queryset = Director.objects.all()
+    serializer_class = DirectorSerializer
 
 @api_view(['GET'])
 def DirectorDetailView(request, id):
     directors = Director.objects.get(id=id)
     data = DirectorSerializer(directors).data
     return Response(data=data)
-
 
 
 @api_view(['GET'])
@@ -40,13 +48,12 @@ def ReviewDetailView(request, id):
     data = ReviewSerializer(reviews).data
     return Response(data=data)
 
+
 @api_view(['GET'])
 def ReviewView(request):
     reviews = Review.objects.all()
     data = ReviewSerializer(instance=reviews, many=True).data
     return Response(data=data, status=status.HTTP_200_OK)
-
-
 
 
 @api_view(['GET'])

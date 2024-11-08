@@ -27,4 +27,6 @@ urlpatterns = [
     path('api/v1/movies/<int:id>/', views.MovieDetailView),
     path('api/v1/reviews/', views.ReviewView),
     path('api/v1/reviews/<int:id>/', views.ReviewDetailView),
+    path('api/v1/movies/reviews/', views.MovieReviewListView.as_view()),
+    path('api/v1/directors/', views.DirectorView),
 ]
