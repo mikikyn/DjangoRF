@@ -3,15 +3,15 @@ from .models import Director, Movie, Review
 
 
 class ReviewSerializer(serializers.ModelSerializer):
-    movie = serializers.StringRelatedField(read_only=True)
+    movies = serializers.StringRelatedField(read_only=True)
 
     class Meta:
         model = Review
-        fields = ['id', 'text', 'stars', 'movie']
+        fields = ['id', 'text', 'stars', 'movies']
 
 
 class DirectorSerializer(serializers.ModelSerializer):
-    movies_count = serializers.SerializerMethodField()
+    movies_count = serializers.SerializerMethodField(required=False)
 
     class Meta:
         model = Director
