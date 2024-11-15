@@ -26,6 +26,9 @@ def DirectorDetailView(request, id):
         data = DirectorSerializer(director).data
         return Response(data=data)
     elif request.method == 'PUT':
+        serializer = DirectorSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
         director.name = request.data.get('name')
         director.save()
         return Response(status=status.HTTP_201_CREATED,
