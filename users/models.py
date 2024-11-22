@@ -4,7 +4,7 @@ import random
 
 
 class ConfirmCode(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='confirma_code')
+    user = models.OneToOneField('auth.User', on_delete=models.CASCADE, related_name='confirm_code')
     code = models.CharField(max_length=6, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 

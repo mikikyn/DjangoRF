@@ -20,6 +20,14 @@ class UserCreateSerializer(serializers.Serializer):
         raise ValidationError('User already exists!')
 
 
+    def validate_username(self, username):
+        try:
+            User.objects.get(username=username)
+        except User.DoesNotExist:
+            return username
+        raise ValidationError('User already exists!')
+
+
 class UserConfirmSerializer(serializers.Serializer):
     username = serializers.CharField(max_length=150)
     code = serializers.CharField(max_length=6)
